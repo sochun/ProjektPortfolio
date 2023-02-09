@@ -5,36 +5,117 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Porfolio</title>
+    <link rel="stylesheet" href="style/style.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>
+        $(document).ready(function() {
+        $("html").on("submit","#contact_form",function(e){
+            e.preventDefault();
+            $("#send_form_status").html('').hide();
+            var data=$("#contact_form").serialize();
+            $.post("/send_form.php",data,function(res){
+            $("#send_form_status").html(res.msg).show();
+            if(res.status==1){ 
+                $("#contact_form")[0].reset();
+            } 
+            });
+        });
+        });
+        </script>
 </head>
 <body>
     <header>
-       
+        <nav>
+            <a href="index.html" alt="Strona główna">
+                <div id="logo-header"></div>
+            </a>
+
+            <div id="social-icons-header">
+
+            </div>
+        </nav>
+        <div class="header-container">
+            <h1>TWÓJ SALON ONLINE</h1>
+
+            <h3>TWOJA PLATFORMA DO ZARZĄDZANIA SALONEM</h3>
+
+            <button>ZAREZERWUJ WIZYTĘ</button>
+        </div>
     </header>
 
     <main>
         <section id="about">
-            
+            <div class="about-container">
+                <div class="gallery">
+
+                </div>
+                <div class="text">
+                    <h2>O mnie</h2>
+                    <hr>
+                    <p>W tej sekcji należy wpisać najważniejsze informacje na temat Twojego salonu</p>
+                </div>
+            </div>
         </section>
 
         <section id="service">
+            <div class="service-container">
+                <div class="simple-service">
+                    <img src="images/photo.jpg">
+                    <h3>Usługa numer jeden</h3>
+                    <button>Dowiedz się więcej</button>
+                </div>
 
+                <div class="simple-service">
+                    <img src="images/photo.jpg">
+                    <h3>Usługa numer jeden</h3>
+                    <button>Dowiedz się więcej</button>
+                </div>
+            </div>
         </section>
 
         <section id="team-members">
-
+            <div class="team-container">
+                <div class="simple-team-member">
+                    <img src="images/photo.jpg">
+                    <h4>JAN KOWALSKI</h4>
+                    <p>FRYZJER</p>
+                </div>
+                <div class="simple-team-member">
+                    <img src="images/photo.jpg">
+                    <h4>KRZYSZTOF KOWALSKI</h4>
+                    <p>BARBER</p>
+                </div>
+                <div class="simple-team-member">
+                    <img src="images/photo.jpg">
+                    <h4>JAN NOWAK</h4>
+                    <p>STYLISTA</p>
+                </div>
+            </div>
         </section>
 
         <section id="reservation">
-
+            Tu powstanie kalendarz
         </section>
 
         <section id="contact">
-
+            <h3>KONTAKT</h3>
+            <div id="send_form_status"></div>
+                <form method="post" action="php/send_form.php" id="contact_form">
+                    <div><label for="name">Imię i nazwisko</label></div>
+                    <div><input type="text" name="name" id="name" class="formField" /></div>
+                    <div><label for="phone">Numer telefonu</label></div>
+                    <div><input type="text" name="phone" id="phone" class="formField" /></div>
+                    <div><label for="email">Adres email</label></div>
+                    <div><input type="text" name="email" id="email" class="formField" /></div>
+                    <div><label for="message">Treść wiadomości</label></div>
+                    <div><textarea name="message" id="message" class="formField"></textarea></div>
+                    <div><button id="sendBtn">Wyślij</button></div>
+                </form>
         </section>
     </main>
 
     <footer>
-
+        © 2023 Strona dla branży beauty. Created by <a href="https://lyk-website.pl">LYK-Website</a>
     </footer>
 
 </body>
